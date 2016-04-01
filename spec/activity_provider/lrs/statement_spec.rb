@@ -16,6 +16,16 @@ RSpec.describe ActivityProvider::LRS::Statement do
     it { is_expected.to eq(valid_attributes) }
   end
 
+  describe '#find' do
+    subject { described_class.find('id') }
+
+    it 'invokes Client.fetch_statement' do
+      id = 'id'
+      expect_any_instance_of(ActivityProvider::LRS::Client).to receive(:fetch_statement).with(id)
+      described_class.find(id)
+    end
+  end
+
   describe '.convert_json' do
     let(:statement_json) do
       '{"id":"da3b6ac8-02f1-4ad5-9d7e-a34bde57404e","actor":{"objectType":"Agent",'\

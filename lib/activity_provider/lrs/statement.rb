@@ -35,7 +35,7 @@ module ActivityProvider
       end
 
       def self.find(id)
-        ActivityProvider.fetch_statement(id)
+        ActivityProvider::LRS::Client.new.fetch_statement(id)
       end
 
       # Converting JSON to Hash for easy using Virtus
